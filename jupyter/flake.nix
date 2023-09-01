@@ -31,6 +31,27 @@
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
     };
+    pythoneda-shared-git-shared = {
+      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a15?dir=shared";
+      inputs.nixos.follows = "nixos";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+    };
+    pythoneda-shared-nix-flake-shared = {
+      url =
+        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a2?dir=shared";
+      inputs.nixos.follows = "nixos";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pythoneda-shared-git-shared.follows =
+        "pythoneda-shared-git-shared";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+    };
     pythoneda-shared-pythoneda-banner = {
       url = "github:pythoneda-shared-pythoneda/banner/0.0.1a16";
       inputs.nixos.follows = "nixos";
@@ -69,8 +90,9 @@
         nixpkgsRelease = "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
         pythoneda-shared-code-requests-jupyter-for = { python
-          , pythoneda-shared-code-requests-shared
-          , pythoneda-shared-pythoneda-domain }:
+          , pythoneda-shared-code-requests-shared, pythoneda-shared-git-shared
+          , pythoneda-shared-nix-flake-shared, pythoneda-shared-pythoneda-domain
+          }:
           let
             pnameWithUnderscores =
               builtins.replaceStrings [ "-" ] [ "_" ] pname;
@@ -88,14 +110,17 @@
               authors = builtins.concatStringsSep ","
                 (map (item: ''"${item}"'') maintainers);
               desc = description;
-              jupyterlabVersion = python.pkgs.jupyterlab.version;
-              inherit homepage package pname pythonMajorMinorVersion
-                pythonpackage version;
-              pythonedaSharedCodeRequestsSharedVersion =
+              jupyterlab = python.pkgs.jupyterlab.version;
+              inherit homepage package pname pythonpackage version;
+              pythonMajorMinor = pythonMajorMinorVersion;
+              pythonedaSharedCodeRequestsShared =
                 pythoneda-shared-code-requests-shared.version;
-              pythonedaSharedPythonedaDomainVersion =
+              pythonedaSharedGitShared = pythoneda-shared-git-shared.version;
+              pythonedaSharedNixFlakeShared =
+                pythoneda-shared-nix-flake-shared.version;
+              pythonedaSharedPythonedaDomain =
                 pythoneda-shared-pythoneda-domain.version;
-              nbformatVersion = python.pkgs.nbformat.version;
+              nbformat = python.pkgs.nbformat.version;
               src = pyprojectTemplateFile;
             };
             src = pkgs.fetchFromGitHub {
@@ -111,6 +136,8 @@
               jupyterlab
               nbformat
               pythoneda-shared-code-requests-shared
+              pythoneda-shared-git-shared
+              pythoneda-shared-nix-flake-shared
               pythoneda-shared-pythoneda-domain
             ];
 
@@ -189,6 +216,10 @@
               python = pkgs.python38;
               pythoneda-shared-code-requests-shared =
                 pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python38;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python38;
+              pythoneda-shared-git-shared =
+                pythoneda-shared-git-shared.packages.${system}.pythoneda-shared-git-shared-python38;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
             };
@@ -197,6 +228,10 @@
               python = pkgs.python39;
               pythoneda-shared-code-requests-shared =
                 pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python39;
+              pythoneda-shared-git-shared =
+                pythoneda-shared-git-shared.packages.${system}.pythoneda-shared-git-shared-python39;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python39;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
             };
@@ -205,6 +240,10 @@
               python = pkgs.python310;
               pythoneda-shared-code-requests-shared =
                 pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python310;
+              pythoneda-shared-git-shared =
+                pythoneda-shared-git-shared.packages.${system}.pythoneda-shared-git-shared-python310;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python310;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
             };
