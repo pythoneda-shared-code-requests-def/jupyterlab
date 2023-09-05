@@ -23,7 +23,7 @@
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     pythoneda-shared-code-requests-shared = {
       url =
-        "github:pythoneda-shared-code-requests/shared-artifact/0.0.1a7?dir=shared";
+        "github:pythoneda-shared-code-requests/shared-artifact/0.0.1a8?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -32,7 +32,7 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-shared-git-shared = {
-      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a15?dir=shared";
+      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a17?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -42,7 +42,7 @@
     };
     pythoneda-shared-nix-flake-shared = {
       url =
-        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a2?dir=shared";
+        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a3?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-git-shared.follows =
@@ -59,7 +59,7 @@
     };
     pythoneda-shared-pythoneda-domain = {
       url =
-        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a38?dir=domain";
+        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a40?dir=domain";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -72,8 +72,8 @@
       let
         org = "pythoneda-shared-code-requests";
         repo = "jupyter";
-        version = "0.0.1a4";
-        sha256 = "sha256-h/IZLTgt4+bBlspkKi3n5zYB0YcPEo4zRhJdzILg28E=";
+        version = "0.0.1a6";
+        sha256 = "sha256-4po6xvWl3ykZPCbsVIeTkfPhlII4sL8SfkGCPtzJgjc=";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.code_requests.jupyter";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
