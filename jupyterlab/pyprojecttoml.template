@@ -1,8 +1,8 @@
-# jupyter/pyprojecttoml.template
+# jupyterlab/pyprojecttoml.template
 #
-# This file is the template for pythoneda-shared-code-requests/jupyter's pyproject.toml
+# This file is the template for pythoneda-shared-code-requests/jupyterlab's pyproject.toml
 #
-# Copyright (C) 2023-today rydnr's pythoneda-shared-code-requests/jupyter-artifact
+# Copyright (C) 2023-today rydnr's pythoneda-shared-code-requests/jupyterlab-artifact
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
