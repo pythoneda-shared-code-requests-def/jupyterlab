@@ -23,7 +23,7 @@
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     pythoneda-shared-code-requests-shared = {
       url =
-        "github:pythoneda-shared-code-requests/shared-artifact/0.0.1a10?dir=shared";
+        "github:pythoneda-shared-code-requests/shared-artifact/0.0.1a11?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -32,7 +32,7 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-shared-git-shared = {
-      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a20?dir=shared";
+      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a21?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -42,7 +42,7 @@
     };
     pythoneda-shared-nix-flake-shared = {
       url =
-        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a7?dir=shared";
+        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a8?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-git-shared.follows =
@@ -53,13 +53,13 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-shared-pythoneda-banner = {
-      url = "github:pythoneda-shared-pythoneda/banner/0.0.1a16";
+      url = "github:pythoneda-shared-pythoneda/banner/0.0.1a17";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
     };
     pythoneda-shared-pythoneda-domain = {
       url =
-        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a42?dir=domain";
+        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a43?dir=domain";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -72,8 +72,8 @@
       let
         org = "pythoneda-shared-code-requests";
         repo = "jupyterlab";
-        version = "0.0.1a8";
-        sha256 = "sha256-SLovs0RPGOEfcmEHH+sKmuagggxD6oN3Qwj70/e6z34=";
+        version = "0.0.1a9";
+        sha256 = "sha256-xdLVTL5UA/KVklr5NWJ+AGRsmr07AL4O88NIrxXT4jc=";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.code_requests.jupyterlab";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
@@ -184,8 +184,30 @@
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
               inherit archRole layer nixpkgsRelease org pkgs repo space;
             };
+          pythoneda-shared-code-requests-jupyterlab-raw-python38 =
+            shared.raw-devShell-for {
+              package =
+                packages.pythoneda-shared-code-requests-jupyterlab-python38;
+              python = pkgs.python38;
+              pythoneda-shared-pythoneda-banner =
+                pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python38;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
+              inherit archRole layer nixpkgsRelease org pkgs repo space;
+            };
           pythoneda-shared-code-requests-jupyterlab-python39 =
             shared.devShell-for {
+              package =
+                packages.pythoneda-shared-code-requests-jupyterlab-python39;
+              python = pkgs.python39;
+              pythoneda-shared-pythoneda-banner =
+                pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python39;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
+              inherit archRole layer nixpkgsRelease org pkgs repo space;
+            };
+          pythoneda-shared-code-requests-jupyterlab-raw-python39 =
+            shared.raw-devShell-for {
               package =
                 packages.pythoneda-shared-code-requests-jupyterlab-python39;
               python = pkgs.python39;
@@ -206,8 +228,30 @@
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
               inherit archRole layer nixpkgsRelease org pkgs repo space;
             };
+          pythoneda-shared-code-requests-jupyterlab-raw-python310 =
+            shared.raw-devShell-for {
+              package =
+                packages.pythoneda-shared-code-requests-jupyterlab-python310;
+              python = pkgs.python310;
+              pythoneda-shared-pythoneda-banner =
+                pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python310;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
+              inherit archRole layer nixpkgsRelease org pkgs repo space;
+            };
           pythoneda-shared-code-requests-jupyterlab-python311 =
             shared.devShell-for {
+              package =
+                packages.pythoneda-shared-code-requests-jupyterlab-python311;
+              python = pkgs.python311;
+              pythoneda-shared-pythoneda-banner =
+                pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python311;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python311;
+              inherit archRole layer nixpkgsRelease org pkgs repo space;
+            };
+          pythoneda-shared-code-requests-jupyterlab-raw-python311 =
+            shared.raw-devShell-for {
               package =
                 packages.pythoneda-shared-code-requests-jupyterlab-python311;
               python = pkgs.python311;
