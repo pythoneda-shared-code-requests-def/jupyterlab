@@ -92,8 +92,8 @@
           in python.pkgs.buildPythonPackage rec {
             inherit pname version;
             projectDir = ./.;
-            pyprojectTemplateFile = ./pyprojecttoml.template;
-            pyprojectTemplate = pkgs.substituteAll {
+            pyprojectTomlTemplate = ./templates/pyproject.toml.template;
+            pyprojectToml = pkgs.substituteAll {
               authors = builtins.concatStringsSep ","
                 (map (item: ''"${item}"'') maintainers);
               desc = description;
@@ -107,7 +107,7 @@
               pythonedaSharedPythonlangDomain =
                 pythoneda-shared-pythonlang-domain.version;
               nbformat = python.pkgs.nbformat.version;
-              src = pyprojectTemplateFile;
+              src = pyprojectTomlTemplate;
             };
             src = pkgs.fetchFromGitHub {
               owner = org;
@@ -132,7 +132,7 @@
               cp -r ${src} .
               sourceRoot=$(ls | grep -v env-vars)
               chmod +w $sourceRoot
-              cp ${pyprojectTemplate} $sourceRoot/pyproject.toml
+              cp ${pyprojectToml} $sourceRoot/pyproject.toml
             '';
 
             postInstall = ''
@@ -156,7 +156,7 @@
         devShells = rec {
           default = pythoneda-shared-code-requests-jupyterlab-default;
           pythoneda-shared-code-requests-jupyterlab-default =
-            pythoneda-shared-code-requests-jupyterlab-python311;
+            pythoneda-shared-code-requests-jupyterlab-python312;
           pythoneda-shared-code-requests-jupyterlab-python38 =
             shared.devShell-for {
               banner = "${
@@ -221,11 +221,27 @@
                 pythoneda-shared-pythonlang-domain.packages.${system}.pythoneda-shared-pythonlang-domain-python311;
               inherit archRole layer org pkgs repo space;
             };
+          pythoneda-shared-code-requests-jupyterlab-python312 =
+            shared.devShell-for {
+              banner = "${
+                  pythoneda-shared-pythonlang-banner.packages.${system}.pythoneda-shared-pythonlang-banner-python312
+                }/bin/banner.sh";
+              extra-namespaces = "";
+              nixpkgs-release = nixpkgsRelease;
+              package =
+                packages.pythoneda-shared-code-requests-jupyterlab-python312;
+              python = pkgs.python312;
+              pythoneda-shared-pythonlang-banner =
+                pythoneda-shared-pythonlang-banner.packages.${system}.pythoneda-shared-pythonlang-banner-python312;
+              pythoneda-shared-pythonlang-domain =
+                pythoneda-shared-pythonlang-domain.packages.${system}.pythoneda-shared-pythonlang-domain-python312;
+              inherit archRole layer org pkgs repo space;
+            };
         };
         packages = rec {
           default = pythoneda-shared-code-requests-jupyterlab-default;
           pythoneda-shared-code-requests-jupyterlab-default =
-            pythoneda-shared-code-requests-jupyterlab-python311;
+            pythoneda-shared-code-requests-jupyterlab-python312;
           pythoneda-shared-code-requests-jupyterlab-python38 =
             pythoneda-shared-code-requests-jupyterlab-for {
               python = pkgs.python38;
@@ -265,6 +281,16 @@
                 pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python311;
               pythoneda-shared-pythonlang-domain =
                 pythoneda-shared-pythonlang-domain.packages.${system}.pythoneda-shared-pythonlang-domain-python311;
+            };
+          pythoneda-shared-code-requests-jupyterlab-python312 =
+            pythoneda-shared-code-requests-jupyterlab-for {
+              python = pkgs.python312;
+              pythoneda-shared-code-requests-shared =
+                pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python312;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python312;
+              pythoneda-shared-pythonlang-domain =
+                pythoneda-shared-pythonlang-domain.packages.${system}.pythoneda-shared-pythonlang-domain-python312;
             };
         };
       });
